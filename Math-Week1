@@ -1,0 +1,216 @@
+Data Science Math: Week 1 Assignment
+
+Please complete exercises 2.1, 2.3, 2.5, 2.7, 2.9, 2.11, 2.13, 2.27, 2.29, and 2.31 = Homework
+
+Please complete and turn in exercises 2.12, 2.14, 2.28, and 2.30 = Assignment
+
+2.6.1 Defining Probability Assignment
+
+2.12 School absences. Data collected at elementary schools in DeKalb County, GA suggest that each year roughly 25% of students miss exactly one day of school, 15% miss 2 days, and 28% miss 3 or more days due to sickness.
+
+a)	What is the probability that a student chosen at random doesn't miss any days of school due to sickness this year?
+Miss-School = 25 + 15 + 28 = 68%
+P(0) = 100 - 68 = 32%
+
+b)	What is the probability that a student chosen at random misses no more than one day?
+P(≤1) =  32% + 25% = 57%
+
+c)	What is the probability that a student chosen at random misses at least one day?
+P(≥1) = 25 + 15 + 28 = 68%
+
+d)	If a parent has two kids at a DeKalb County elementary school, what is the probability that neither kid will miss any school? Note any assumption you must make to answer this question.
+32%, if I assume they are independent events
+
+e)	If a parent has two kids at a DeKalb County elementary school, what is the probability that that both kids will miss some school, i.e. at least one day? Note any assumption you make.
+68%, if I assume they are independent events
+
+f)	If you made an assumption in part (d) or (e), do you think it was reasonable? If you didn't make any assumptions, double check your earlier answers.
+Not the most reasonable assumption, because child behavior is suppose to be influenced by friends and family making these events more likely dependent. If my brother doesn’t miss, I’m probably more likely not to miss. However, these data may reflect that bias. In other words 32% of the families are families that don’t miss school. This is my problem with probability. I can easily argue myself in a circle.
+
+2.14 Weight and health coverage, Part I. The Behavioral Risk Factor Surveillance System (BRFSS) is an annual telephone survey designed to identify risk factors in the adult population and report emerging health trends. The following table summarizes two variables for the respondents: weight status using body mass index (BMI) and health coverage, which describes whether each respondent had health insurance.
+
+a)	If we draw one individual at random, what is the probability that the respondent is overweight and doesn't have health coverage?
+P(O & No) = 15,327/428,638 = .0358 = 3.58%
+
+b)	If we draw one individual at random, what is the probability that the respondent is overweight or doesn't have health coverage?
+P(O or No) = P(O) + P(No) – P(O & No) = 157,026/428,638 + 44,837/428,638 – 15,327/428,638
+P(O or No) = .3663 + .1046 - .0358 = .4351 = 43.5%
+
+2.6.3 Sampling from a Small Population Assignment
+
+2.28 Socks in a drawer. In your sock drawer you have 4 blue, 5 gray, and 3 black socks. Half asleep one morning you grab 2 socks at random and put them on. Find the probability you end up wearing
+
+a)	2 blue socks
+P(blu1, blu2) = 4/12 X 3/11 = 12/132 = 0.091 = 9.1%
+
+b)	no gray socks
+P(No-g1,No-g2) = 7/12 X 6/11 = 7/22 = 0.318 = 3.18%
+
+c)	at least 1 black sock
+P(No-bla1, No-bla2) = 9/12 X  8/11 = 6/11 = 0.545 = 54.5%
+P(1-black) = 1 – 0.545 = 0.454 = 45.4%
+
+d)	a green sock
+P(green) = 0/12 = 0 = 0%, there are no green socks
+
+e)	matching socks
+P(blu1, blu2) = .091
+P(g1, g2) = 5/12 X 4/11 = 5/33 = .152
+P(bla1, bla2) = 3/12 X 2/11 = 2/44 = .045
+P(matching) = P(blu1, blu2) + P(g1, g2) + P(bla1, bla2) = 0.288 = 28.8%
+
+2.30 Books on a bookshelf. The table below shows the distribution of books on a bookcase based on whether they are nonfiction or fiction and hardcover or paperback.
+
+a)	Find the probability of drawing a hardcover book first then a paperback fiction book second when drawing without replacement.
+P(h-any, p-f) = 28/95 X 59/94 = 1,652/6,110 = 0.270 = 27%
+
+b)	Determine the probability of drawing a fiction book first and then a hardcover book second, when drawing without replacement.
+There are 2 ways this could happen: paper fiction 1st & any hardback 2nd or hardback fiction first & any remaining hardback 2nd, which changes the number of hardbacks
+P(p-f, h-any) = 59/95 X 28/94 = 1,652/8,930 = 0.185
+P(h-f, h-any) = 13/95 X 27/94 = 351/8,930 = 0.039
+P(any-f, h-any) = P(pf, hany) + P(hf, hany) = 0.185 + 0.039 = 0.224 = 22.4%
+
+c)	Calculate the probability of the scenario in part (b), except this time complete the calculations under the scenario where the first book is placed back on the bookcase before randomly drawing the second book.
+P(any-f, h-any) = 72/95 X 28/95 = 2,016/9,025 = 0.223 = 22.3%
+
+d)	The final answers to parts (b) and (c) are very similar. Explain why this is the case.
+Our book states: “When the sample size is only a small fraction of the population (under 10%), observations are nearly independent even when sampling without replacement.” This calculation seems to show that is true.
+
+2.6.1 Defining Probability Homework
+
+2.1 Determine if the statements below are true or false, and explain your reasoning.
+
+a)	If a fair coin is tossed many times and the last eight tosses are all heads, then the chance that the next toss will be heads is somewhat less than 50%.
+FALSE: each toss is independent, so the probability is ½ or 50% every time
+
+b)	Drawing a face card (jack, queen, or king) and drawing a red card from a full deck of playing cards are mutually exclusive events.
+FALSE: because there are red face cards, these are NOT mutually exclusive events
+
+c)	Drawing a face card and drawing an ace from a full deck of playing cards are mutually exclusive events.
+TRUE: because an ace is NOT a face card, these are mutually exclusive events
+
+2.3 Four games, one winner. Below are four versions of the same game. Your arch nemesis gets to pick the version of the game, and then you get to choose how many times to flip a coin: 10 times or 100 times. Identify how many coin flips you should choose for each version of the game. It costs $1 to play each game. Explain your reasoning.
+
+a)	If the proportion of heads is larger than 0.60, you win $1.
+10 Times: because the probability distribution trends to 0.50 the higher number of flips
+
+b)	If the proportion of heads is larger than 0.40, you win $1.
+100 Times: because the probability distribution trends to 0.50 the higher number of flips
+
+c)	If the proportion of heads is between 0.40 and 0.60, you win $1.
+100 Times: because the probability distribution trends to 0.50 the higher number of flips
+
+d)	If the proportion of heads is smaller than 0.30, you win $1.
+10 Times: because the probability distribution trends to 0.50 the higher number of flips
+
+2.5 Coin Flips. If you flip a fair coin 10 times, what is the probability of
+a)	getting all tails? 
+We have 10 independent events, each with a probability of 1/2, so we get 1/210 = 1/1024 = .00098 = .098%
+
+b)	getting all heads? 
+Same as above, because of the same probabilities = .098%
+
+c)	getting at least one tails?
+P(at least 1 tail) = 1 – P(all heads) = 1 – .00098 ~= .999 = 99.9%
+
+2.7 Swing voters. A 2012 Pew Research survey asked 2,373 randomly sampled registered voters their political affiliation (Republican, Democrat, or Independent) and whether or not they identify as swing voters. 35% of respondents identified as Independent, 23% identified as swing voters, and 11% identified as both.
+
+a)	Are being Independent and being a swing voter disjoint, i.e. mutually exclusive?
+NO, 11% are both Independent and Swing voters
+
+b)	Draw a Venn diagram summarizing the variables and their associated probabilities.
+I drew one on paper
+
+c)	What percent of voters are Independent but not swing voters?
+35% - 11% = 24%
+
+d)	What percent of voters are Independent or swing voters?
+I think this includes both = 35% + 23% - 11% = 47%
+
+e)	What percent of voters are neither Independent nor swing voters?
+100% - 35% - 23% + 11% = 100 – 47 = 53%
+
+f)	Is the event that someone is a swing voter independent of the event that someone is a political Independent?
+NO, you can be both, so they are NOT independent
+
+2.9 Disjoint vs. independent. In parts (a) and (b), identify whether the events are disjoint, independent, or neither (events cannot be both disjoint and independent).
+
+a)	You and a randomly selected student from your class both earn A's in this course.
+Independent
+
+b)	You and your class study partner both earn A's in this course.
+Independent (Answer was probably dependent)
+
+c)	If two events can occur at the same time, must they be dependent?
+No
+
+2.11 Educational attainment of couples. The table below shows the distribution of education level attained by US residents by gender based on data collected during the 2010 American Community Survey.
+
+a)	What is the probability that a randomly chosen man has at least a Bachelor's degree?
+.16 + .09 = .25 = 25%
+
+b)	What is the probability that a randomly chosen woman has at least a Bachelor's degree?
+.17 + .09 = .26 = 26%
+
+c)	What is the probability that a man and a woman getting married both have at least a Bachelor's degree? Note any assumptions you must make to answer this question.
+If we treat these as independent events, like getting 2 heads from 2 coins, meaning a college grad is going to find a mate from a random sample (not likely, grads tends to know grads) we multiply the 2 probabilities together. .25 X .26 = .065 = 6.5%
+
+d)	If you made an assumption in part (c), do you think it was reasonable? If you didn't make an assumption, double check your earlier answer and then return to this part.
+I assumed independent events, which I don’t think is reasonable. I think the population of potential mates is not random and is a smaller population of people that go to college. They might not all graduate, but that’s who you would know.
+
+2.13 Grade distributions. Each row in the table below is a proposed grade distribution for a class. Identify each as a valid or invalid probability distribution, and explain your reasoning.
+
+a)	Invalid, the row adds up to 1.2 or 120%. A probability distribution should add up to 1 (100%)
+
+b)	Valid, it adds up to 1, but is not much of a distribution, it means everyone gets a C
+
+c)	Invalid, because it adds to less than 1
+
+d)	Invalid, it adds up to 1, but does so with a negative value, which I don’t think is valid
+
+e)	Valid, adds up to 1, no negative values
+
+f)	Invalid, a negative value again
+
+2.6.3 Sampling from a Small Population Homework
+
+2.27 Urns and marbles, Part I. Imagine you have an urn containing 5 red, 3 blue, and 2 orange marbles in it.
+
+a)	What is the probability that the first marble you draw is blue?
+P(b) = 3/10 = 0.3 = 30%
+
+b)	Suppose you drew a blue marble in the first draw. If drawing with replacement, what is the probability of drawing a blue marble in the second draw?
+Same: P(b) = 3/10 = 0.3 = 30%
+
+c)	Suppose you instead drew an orange marble in the first draw. If drawing with replacement, what is the probability of drawing a blue marble in the second draw?
+Same again: 0.3 = 30%
+
+d)	If drawing with replacement, what is the probability of drawing two blue marbles in a row?
+P(b1 & b2) = 3/10 X 3/10 = 9/100 = 0.09 = 9%
+
+e)	When drawing with replacement, are the draws independent? Explain.
+YES, the population is the same for each draw
+
+2.29 Urns and marbles, Part II. Imagine you have an urn containing 5 red, 3 blue, and 2 orange marbles.
+
+a)	Suppose you draw a marble and it is blue. If drawing without replacement, what is the probability the next is also blue?
+P( b2 worb) = 2/9 = 0.22 = 22%
+
+b)	Suppose you draw a marble and it is orange, and then you draw a second marble without replacement. What is the probability this second marble is blue?
+P(b2 woro) = 3/9 = 1/3 = 0.33 = 33%
+
+c)	If drawing without replacement, what is the probability of drawing two blue marbles in a row?
+P(b1 & b2 wor) = 3/10 X 2/9 = 6/90 = 1/15 = .067 = 6.7%
+
+d)	When drawing without replacement, are the draws independent? Explain.
+NO, each draw reduces the population and changes the probability of the next draw
+
+2.31 Student outfits. In a classroom with 24 students, 7 students are wearing jeans, 4 are wearing shorts, 8 are wearing skirts, and the rest are wearing leggings. If we randomly select 3 students without replacement, what is the probability that one of the selected students is wearing leggings and the other two are wearing jeans? Note that these are mutually exclusive clothing options.
+
+24 students = 7 jeans + 4 shorts + 8 skirts + 5 leggings
+
+There are 3 ways for this to happen: (JJL), (JLJ), or (LJJ).
+P(JJL) = 7/24 X 6/23 X 5/22 = 210/12,144 = 0.0173
+P(JLJ) = 7/24 X 5/23 X 6/22 = 210/12,144 = 0.0173
+P(LJJ) = 5/24 X 7/23 X 6/22 = 210/12,144 = 0.0173
+P(any 2J & 1L) = P(JJL) + P(JLJ) + P(LJJ) = 0.0173 + 0.0173 + 0.0173 = 0.0519 = 5.19%
