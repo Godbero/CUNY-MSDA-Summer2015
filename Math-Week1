@@ -8,24 +8,30 @@ Please complete and turn in exercises 2.12, 2.14, 2.28, and 2.30 = Assignment
 
 2.12 School absences. Data collected at elementary schools in DeKalb County, GA suggest that each year roughly 25% of students miss exactly one day of school, 15% miss 2 days, and 28% miss 3 or more days due to sickness.
 
-a)	What is the probability that a student chosen at random doesn't miss any days of school due to sickness this year?
+a) What is the probability that a student chosen at random doesn't miss any days of school due to sickness this year?
 Miss-School = 25 + 15 + 28 = 68%
 P(0) = 100 - 68 = 32%
 
-b)	What is the probability that a student chosen at random misses no more than one day?
+b) What is the probability that a student chosen at random misses no more than one day?
 P(≤1) =  32% + 25% = 57%
 
-c)	What is the probability that a student chosen at random misses at least one day?
+c) What is the probability that a student chosen at random misses at least one day?
 P(≥1) = 25 + 15 + 28 = 68%
 
-d)	If a parent has two kids at a DeKalb County elementary school, what is the probability that neither kid will miss any school? Note any assumption you must make to answer this question.
-32%, if I assume they are independent events
+d) If a parent has two kids at a DeKalb County elementary school, what is the probability that neither kid will miss any 
+school? Note any assumption you must make to answer this question.
+P(0-k1 & k2) = P(0-k1) X P(0-k2) = .322 X .322 = 0.1024
+P(0-k1&k2) = 10.24%, if I assume they are independent events
 
-e)	If a parent has two kids at a DeKalb County elementary school, what is the probability that that both kids will miss some school, i.e. at least one day? Note any assumption you make.
-68%, if I assume they are independent events
+e) If a parent has two kids at a DeKalb County elementary school, what is the probability that that both kids will miss 
+some school, i.e. at least one day? Note any assumption you make.
+P(≥1-k1 & k2) = P(≥1-k1) X P(≥1-k2) = .682 X .682 = 0.4624
+P(≥1-k1 & k2) = 46.24%, if I assume they are independent events
 
-f)	If you made an assumption in part (d) or (e), do you think it was reasonable? If you didn't make any assumptions, double check your earlier answers.
-Not the most reasonable assumption, because child behavior is suppose to be influenced by friends and family making these events more likely dependent. If my brother doesn’t miss, I’m probably more likely not to miss. However, these data may reflect that bias. In other words 32% of the families are families that don’t miss school. This is my problem with probability. I can easily argue myself in a circle.
+f)	If you made an assumption in part (d) or (e), do you think it was reasonable? If you didn't make any assumptions, 
+double check your earlier answers.
+Not the most reasonable assumption, because child behavior is suppose to be influenced by friends and family making 
+these events more likely dependent. If my brother doesn’t miss, I’m probably more likely not to miss. 
 
 2.14 Weight and health coverage, Part I. The Behavioral Risk Factor Surveillance System (BRFSS) is an annual telephone survey designed to identify risk factors in the adult population and report emerging health trends. The following table summarizes two variables for the respondents: weight status using body mass index (BMI) and health coverage, which describes whether each respondent had health insurance.
 
