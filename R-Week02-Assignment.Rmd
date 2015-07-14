@@ -1,0 +1,93 @@
+---
+title: "R Week 2 Assignment"
+author: "Robert Godbey"
+date: "July 8, 2015"
+output: html_document
+---
+In probability, "n choose r" means n! / (( n - r)! * r!). For example, "5 choose 3" evaluates to 10. R has built in functions for choose() and factorial(). My task was to write my own variation of the choose() function, that does not use either of these functions.
+
+My first step was to figure out how to multiply a series of numbers together from 1 to n, in order to get n factorial. I knew I could use a loop, but preferred not to use one. I found the prod() function and had my answer. To find 5 factorial I could use prod(1:5) or n! is prod(1:n).
+
+This code snippet give us 2!, 3!, 4! and 5! (or 1 X 2, 1 X 2 X 3, 1 X 2 X 3 X 4, etc.)
+```{r}
+a <- 2
+b <- 3
+c <- 4
+d <- 5
+
+prod(1:a)
+prod(1:b)
+prod(1:c)
+prod(1:d)
+
+```
+
+This allowed me to write n choose r in the following way in R. The following snippet gives us 5 choose 3 (which should equal 10 from above).
+
+```{r}
+n = 5
+r = 3
+
+nfac <- prod(1:n)           # This is n!
+rfac <- prod(1:r)           # This is r!
+nrfac <- prod(1:(n - r))    # This (n - r)!
+
+mychoose <- nfac / (nrfac * rfac)
+sprintf("%s choose %s = %s", n, r, mychoose)
+```
+
+Now all I needed to do was turn the above code into a function for any n and r and handle unexpected values for n and r. We can see from the equation above that both n and r need to be postive integers greater than zero and n needs to be greater than r. I discovered from testing I needed to improve my function to handle n = r, which should give the answer 1.
+
+Here is the final function code for nchooser, my function for n choose r.
+
+```{r}
+# Function for "n choose r" means n! / (( n - r)! * r!) without choose() or factorial().
+
+nchooser <- function(n, r) {
+        # Let's start with some error handling.
+        if (!is.numeric(n) || !is.numeric(r) || (n <= 0) || (r <= 0)){
+                answer <- "This function requires two > 0 numbers to work."
+        } else if (n < r) {
+                answer <- "This function requires the first number > second."
+        } else {
+                # Multiply the numbers from 1 to x together to get n!, r!, and (n - r)!
+                nfac <- prod(1:n)
+                rfac <- prod(1:r)
+                if (n == r) {
+                        # This covers (n - r)! = 0! = 1
+                        nrfac <- 1
+                } else {
+                        nrfac <- prod(1:(n - r))
+                }
+                mychoose <- nfac / (nrfac * rfac)
+                answer <- sprintf("%s choose %s = %s", n, r, mychoose)
+        }
+        return(answer)
+}
+```
+
+
+The test results for nchooser for these data follows. We can see the expected responses here.
+
+- nchooser(5, 3) = 10
+- nchooser(6, 3) = 20
+- nchooser(6, 2) = 15
+- nchooser(5, 5) = 1
+- nchooser(3, 5) = error
+- nchooser(5, 0) = error
+- nchooser(5, "a") = error
+
+```{r}
+# Call the rchooser function with these test data
+
+nchooser(5, 3)
+nchooser(6, 3)
+nchooser(6, 2)
+nchooser(5, 5)
+nchooser(3, 5)
+nchooser(5, 0)
+nchooser(5, "a")
+```
+
+These results convince me that my function is able to calculate n choose r.
+
