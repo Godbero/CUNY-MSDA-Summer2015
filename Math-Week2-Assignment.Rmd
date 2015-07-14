@@ -1,0 +1,83 @@
+---
+title: "Math-Week2 Assignment"
+author: "Robert Godbey"
+date: "July 11, 2015"
+output: html_document
+---
+
+## 2.16 PB & J. 
+
+Suppose 80% of people like peanut butter, 89% like jelly, and 78% like both.
+Given that a randomly sampled person likes peanut butter, what's the probability that he also
+likes jelly?
+
+**P(j|pb) = P(j and pb)/P(pb) = .78/.80 = 0.975 ~ 98%**
+
+## 2.18 Weight and health coverage, Part II. 
+
+Exercise 2.14 introduced a contingency table
+summarizing the relationship between weight status, which is determined based on body mass
+index (BMI), and health coverage for a sample of 428,638 Americans. In the table below, the
+counts have been replaced by relative frequencies (probability estimates).
+
+(a) What is the probability that a randomly chosen individual is obese?
+
+**P(Ob) = 0.2839**
+
+(b) What is the probability that a randomly chosen individual is obese given that he has health
+coverage?
+
+**P(Ob|y) = P(Ob and y)/P(y) = .2503/.8954 = 0.2795 ~ 28%**
+
+(c) What is the probability that a randomly chosen individual is obese given that he doesn't have
+health coverage?
+
+**P(Ob|n) = P(Ob and n)/P(n) = .0336/.1046 = 0.3212 ~ 32%**
+
+(d) Do being overweight and having health coverage appear to be independent?
+
+**NO, but ... they seem close to being independent. if they were P(Ob|y) = P(Ob)**
+**= P(Ob|n)P(Ob) = .2839 and P(Ob|y) = .2795, which both round to 28% and that**
+**seems close to me. However,P(Ob|n) = .3212, which is a differnce of 4%, that's**
+**NOT equal, but how much is significant?**
+
+## 2.20 Assortative mating. 
+Assortative mating is a nonrandom mating pattern where individuals
+with similar genotypes and/or phenotypes mate with one another more frequently than what would
+be expected under a random mating pattern. Researchers studying this topic collected data on
+eye colors of 204 Scandinavian men and their female partners. The table below summarizes the
+results. For simplicity, we only include heterosexual relationships in this exercise.
+
+(a) What is the probability that a randomly chosen male respondent or his partner has blue eyes?
+
+**P(m-b or f-b) = P(m-b) + P(f-b) - P(m-b and f-b) = (114 + 108 - 78)/204 = 144/204 = 0.7059**
+
+(b) What is the probability that a randomly chosen male respondent with blue eyes has a partner
+with blue eyes?
+
+**P(f-b|m-b) = P(f-b and m-b)/P(m-b) 78/204 X 204/114 = 78/114 = 0.6842**
+
+(c) What is the probability that a randomly chosen male respondent with brown eyes has a partner
+with blue eyes? What about the probability of a randomly chosen male respondent with green
+eyes having a partner with blue eyes?
+
+**P(f-b|m-br) = P(f-b and m-br)/P(m-br) = 19/204 X 204/54 = 19/54 = 0.3518**
+**P(f-b|m-g) = P(f-b and m-g)/P(m-g) = 11/204 X 204/36 = 11/36 = 0.3056**
+
+(d) Does it appear that the eye colors of male respondents and their partners are independent?
+Explain your reasoning.
+
+**No. First there is how close a randomly chosen male or his partner having blue eyes (a) is to a randomly chosen male with blue eyes having a partner with blue eyes (71% vs 68%); then we have the probabilities in (c) being almost half for brown and less than half for green.**
+
+## 2.26 Twins. 
+
+About 30% of human twins are identical, and the rest are fraternal. Identical
+twins are necessarily the same sex { half are males and the other half are females. One-quarter
+of fraternal twins are both male, one-quarter both female, and one-half are mixes: one male, one
+female. You have just become a parent of twins and are told they are both girls. Given this
+information, what is the probability that they are identical?
+
+--> 100% twins = 30% Identical + 70% fraternal = 15 mm + 15 ff + 17.5 mm + 17.5 ff + 35 mf
+
+**P(i|ff) = P(i and ff)/P(ff) = .15/.325 = 0.4615 ~ 46%**
+
