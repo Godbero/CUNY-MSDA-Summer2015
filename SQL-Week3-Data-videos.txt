@@ -1,0 +1,7 @@
+29,"Web scraping with R and rvest",4,"http://www.computerworld.com/article/2909560/business-intelligence/web-scraping-with-r-and-rvest-includes-video-code.html"
+30,"Scraping Web Page Data Automatically with Excel VBA",24,"https://www.youtube.com/watch?v=uWoxx235fkc"
+31,"Intermediate Java Tutorial - 32 - Getting the Data from the HTML File",10,"https://www.youtube.com/watch?v=FMV1eMapiSY"
+32,"An Introduction to Analytical Webscraping With R",51,"https://www.youtube.com/watch?v=m6zMBFCfgto"
+33,"Web Scraping Techniques (with Perl)",60,"https://www.youtube.com/watch?v=SFnNMQ_6mQw"
+34,"Python Web Scraping Tutorial 2 (Getting Page Source)",10,"https://www.youtube.com/watch?v=kPhZDsJUXic"
+35,"How to Scrape Data From the Web Using Google Spreadsheet",10,"https://www.youtube.com/watch?v=hjRCdaG1WYY"
