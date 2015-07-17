@@ -1,0 +1,8 @@
+"Odell",3,"Hello. Thanks for this example. I'm trying to do something similar with amazon.com and I'm getting a error. Do you know why?",30
+"Lynda",5,"Very good video, good work. May I know what is the best programming language to do web data scraping please?",30
+"Swede",3,"I've just started to learn Java and have a background in JavaScript. I get a sense that Java is somehow over-complicated.",31
+"Holmes",,"Who's the douche bag who would dislike this video?!",31
+"Antonio",4,"Hello, I found your video very interesting. I'm an R newbie and I got very interested in the Web Scrapping topic.",32
+"Scott",5,"Great presentation, really loved. Really love you videos. Keep up the good work.",33
+"Jay",5,"AMAZING TUTORIALS! I am actually getting what I wanted without having to invest time in the language itself. I love you man.",34
+"Joey",4,"Always amazed at how people in comments can cut someone down so much. This particular video, for me, was a great lesson.",34
