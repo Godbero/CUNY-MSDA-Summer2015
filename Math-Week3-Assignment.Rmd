@@ -1,0 +1,159 @@
+---
+title: "Math-Week3-Assignment"
+author: "Robert Godbey"
+date: "July 18, 2015"
+output: html_document
+---
+## 2.34 Card game. 
+Consider the following card game with a well-shuffled deck of cards. If you
+draw a red card, you win nothing. If you get a spade, you win $5. For any club, you win $10 plus
+an extra $20 for the ace of clubs.
+
+###(a)
+Create a probability model for the amount you win at this game. Also, find the expected
+winnings for a single game and the standard deviation of the winnings.
+
+X = amount you can win at this game (# of dollars you can win)
+
+x = (0, 5, 10, 20)
+
+P(X=0) = P(probability of picking a red card) = 26/52 = .50
+
+P(X=5) = P(probability of picking a spade) = 13/52 = .25
+
+P(X=10) = P(proability of picking a club, but not the ace) = 12/52 $\approx$ .231
+
+P(X=20) = P(probability of picking the ace of clubs) = 1/52 $\approx$ .019
+
+Probability Distribution of X
+
+x | p(X = x) | Decimal
+--|----------|----------
+0 | 26/52 | 0.50
+5 | 13/52 | 0.25
+10 | 12/52 | 0.231
+20 | 1/52 | 0.019
+Total | 52/52 | 1.00
+
+Expected winnings = mean = $\mu$ = E[X] = $\sum_{X}$ * P(X=x)
+
+$\mu$ = (0 * 26/52) + (5 * 13/52) + (10 * 12/52) + (20 * 1/52)
+
+$\mu$ = 0 + 65/52 + 120/52 + 20/52 = 205/52 $\approx$ 3.94      
+
+**Answer to 2.34 (a) part 1: Expected winnings = 3.94**
+
+
+Standard Deviation = Squareroot of the variance = $\sigma$
+
+$\sigma^2$ = V[X] = $\sum_{X} (x - \mu)^2$ * P(X = x)
+
+$\sigma^2 = (0 - 205/52)^2 * (26/52) + (5 - 205/52)^2 * (13/52) + (10 - 205/52)^2 * (12/52) + (20 - 205/52)^2 * (1/52)$
+
+$\sigma^2$ = 42,025/5,408 + 3,025/10,816 + 297,675/35,152 + 697,225/140,608
+
+$\sigma^2$ = 87,075/10,816 + 145,225/10,816 = 232,300/10,816 = 58,075/2,704 $\approx$ 21.477
+
+Standard Deviation = $\sigma = \sqrt{\sigma^2} = \sqrt{21.477} \approx 4.6$
+
+**Answer to 2.34 (a) part 2: Standard Deviation = 4.6**
+
+
+###(b) 
+What is the maximum amount you would be willing to pay to play this game? Explain.
+
+**Answer to 2.34 (b) = I would pay (bet) upto $5, because this distribution means you win half the time. Out of that half you make back $5 half the time and more the other half. Much better odds than Vegas. In other words, the expected win is 3.94 or 5 (out of available values) $\pm$ 4.6 or 5.**
+
+
+## 2.40 Baggage fees. 
+An airline charges the following baggage fees: $25 for the first bag and $35 for the second. Suppose 54% of passengers have no checked luggage, 34% have one piece of checked luggage and 12% have two pieces. We suppose a negligible portion of people check more than two bags.
+
+###(a) 
+Build a probability model, compute the average revenue per passenger, and compute the corresponding standard deviation.
+
+Event | X | P(X) | X * P(X)
+------|---|------|---------------
+No checked bag | 0 | .54 | 0
+1 checked bag | $25 | .34 | 8.5
+2 checked bags | $60 | .12 | 7.2
+ | | | | E(X) = 15.7
+
+**Answer to 2.40 (a) part 1: average revenue per passenger = E(x) = $15.70**
+
+$\sigma^2$ = V[X] = $\sum_{X} (x - \mu)^2$ * P(X = x)
+
+$\sigma^2 = (0 - 15.7)^2 * .54 + (25 - 15.7)^2 * .34 + (60 - 15.7)^2 * .12$
+
+$\sigma^2$ = 133.1 + 29.4 + 235.5 = 398
+
+Standard Deviation = $\sigma = \sqrt{\sigma^2} = \sqrt{398} \approx 19.95$
+
+**Answer to 2.40 (a) part 2: corresponding standard deviation = $\sigma \approx 19.95$**
+
+###(b) 
+About how much revenue should the airline expect for a flight of 120 passengers? With what
+standard deviation? Note any assumptions you make and if you think they are justified.
+
+Quick Way: revenue = 120 * $15.70 = $1,884 $\pm$ $20 (or 19.95 rounded up)
+
+Longer Way: (120 * .54 * 0) + (120 * .34 * 25) + (120 * .12 * 60) = $1,884, use same $\sigma$
+
+**Answer to 2.40 (b): how much revenue = # of passengers * average revenue = $1,884 $\pm$ $20**
+
+
+##2.42 Selling on Ebay. 
+
+Marcie has been tracking the following two items on Ebay:
+
+* A textbook that sells for an average of $110 with a standard deviation of $4.
+* Mario Kart for the Nintendo Wii, which sells for an average of $38 with a standard deviation
+of $5.
+
+###(a) 
+Marcie wants to sell the video game and buy the textbook. How much net money (profits -
+losses) would she expect to make or spend? Also compute the standard deviation of how much
+she would make or spend.
+
+$X_{game} - Y_{book}$ = $38 - $110 = -$72, or she will spend $72
+
+SD = $\sigma = \sqrt{\sigma^2}$ = $\sqrt{4^2 + 5^2} = \sqrt{16 + 25} \approx 6.40$
+
+**Answer to 2.42 (a): She should expect to spend $72 with a SD of $6.40**
+
+###(b) 
+Lucy is selling the textbook on Ebay for a friend, and her friend is giving her a 10% commission
+(Lucy keeps 10% of the revenue). How much money should she expect to make? With what
+standard deviation?
+
+E(X) = $110 * .10 Commisson = $11; SD = $4 * .10 = $.4
+
+**Answer to 2.42 (b): Lucy should expect $11 with an SD of $.40 (40 cents).**
+
+##2.46 Income and gender. 
+The relative frequency table below displays the distribution of annual total personal income (in 2009 in ation-adjusted dollars) for a representative sample of 96,420,486 Americans. These data come from the American Community Survey for 2005-2009. This sample is comprised of 59% males and 41% females.
+
+###(a) 
+Describe the distribution of total personal income.
+
+**Answer to 2.46 (a) This is a smooth distribution rising to the middle value ($35,000 to $49,999), dropping quickly after this for the next two sections, before rising slowly for the last two sections. I would call it roller coaster like.**
+
+###(b)
+What is the probability that a randomly chosen US resident makes less than $50,000 per year?
+
+P(<$50k/yr) = 21.2% + 18.3% + 15.8% + 4.7% + 2.2% = 62.2%
+
+**Answer to 2.46 (b): P(<$50k/yr) = 62.2%**
+
+###(c)
+What is the probability that a randomly chosen US resident makes less than $50,000 per year and is female? Note any assumptions you make.
+
+P(<$50k/yr and female) = P(<$50k/yr) * P(female) = we would expect the percentage of females to be evenly distributed throughout this distribution if these things were independent = 41% (females) of the 62.2% (<$50k/yr) = .622 * .41 = ,255 = 25.5%
+
+**Answer to 2.46 (c): P(<$50k/yr and female) = 25.5%, if these two events are independent**
+
+###(d)
+The same data source indicates that 71.8% of females make less than $50,000 per year. Use this value to determine whether or not the assumption you made in part (c) is valid.
+
+**Answer to 2.46 (d) No, my assumption is not valid. Being a woman amd making less money is NOT independent.**
+
+
