@@ -1,0 +1,97 @@
+---
+title: "R-Week4-Assignment"
+author: "Robert Godbey"
+date: "July 21, 2015"
+output:
+        html_document:
+        toc: true
+        toc_depth: 2
+        number_sections: true
+---
+
+##Introduction
+This is an exploratory analysis of an air quality data set.It contains daily air quality measurements in New York City, from May 1, 1973 to September 30, 1973. Four data points were to be measured each day along with the date. The data were obtained from the New York State Department of Conservation (ozone data) and the National Weather Service (meteorological data).
+
+* Ozone: Mean ozone in parts per billion from 1300 to 1500 hours at Roosevelt Island
+* Solar.R: Solar radiation in Langleys in the frequency band 4000-7700 Angstroms from 0800 to 1200 hours at Central Park
+* Wind: Average wind speed in miles per hour at 0700 and 1000 hours at LaGuardia Airport
+* Temp: Maximum daily temperature in degrees Fahrenheit at La Guardia Airport.
+
+## First Look at Dataset
+We read the dataset in from a simple text file (CSV) to a dataframe named airquality. We can take our first look at what we imported with R's Head and Tail functions. We can follow up by looking at the structure and summary of the data.
+
+```{r}
+airquality <- read.csv("~/CUNY/Bridge Classes/R Programming/Week4/airquality.csv", row.names=1)
+head(airquality)
+tail(airquality)
+str(airquality)
+summary(airquality)
+
+```
+
+We see a dataframe of 153 observations of our four variables: Ozone Level, Solar Radiation, Wind Speed, and Air Temperature. The date for each obsevation set is stored in two fields, one for month and one for day. All the data values are stored as integer except Wind Speed, which is stored as a numeric value.
+
+Looking at the results from the Summary Function we see that Ozone and Solar.R are the only fields with NA's recorded for obsevations. We also see that although Solar.R is missing seven (7) values or the equivalent of a week of data, Ozone is missing thirty-seven (37) or over a month of observation in a five (5) month study.
+
+Closer study shows that four (4) of the Solar.R NA's were in May with only two in a row. The other three were consecutive days in August. The Ozone values show five (5) missed days in May with three in a row. There were twenty-one missed days in June with both a six day consecutive run at the beginning of the month and a ten (10) day run at the end. There were five (5) missed Ozone values in July with two in a row being the longest streak, and the same was true for August. There was one NA Ozone value in September making it the most complete month.
+
+## Individual Variable Examination
+Sometimes examining the values of a variable visually can give additional insight into the data set. One easy way to inspect data this way is to do a histogram on each variable. This gives you a feel for the spread of the values and how they cluster. Here are the histograms for ozone, solar radiation, wind speed and air temperature.
+
+```{r, echo=FALSE}
+library(ggplot2)
+```
+
+```{r}
+ggplot(airquality, aes(x = Ozone)) + geom_histogram(binwidth = 5, fill="green", color="black")
+ggplot(airquality, aes(x = Solar.R)) + geom_histogram(binwidth = 10, fill="orange", color="black")
+ggplot(airquality, aes(x = Wind)) + geom_histogram(binwidth = 1, fill="blue", color="black")
+ggplot(airquality, aes(x = Temp)) + geom_histogram(binwidth = 5, fill="red", color="black")
+
+```
+
+We can also look at the distribution of values for a variable by using a box plot. Here are box plots for are four values.
+
+```{r}
+ggplot(airquality, aes(y = Ozone, x = 1)) + geom_boxplot(fill="green")
+ggplot(airquality, aes(y = Solar.R, x = 1)) + geom_boxplot(fill="orange")
+ggplot(airquality, aes(y = Wind, x = 1)) + geom_boxplot(fill="blue")
+ggplot(airquality, aes(y = Temp, x = 1)) + geom_boxplot(fill="red")
+```
+
+## Comparing Data Over Time
+To get a quick and dirty view of air quality by month, and the impact of the missing ozone readings for June, we do a line and point plot of ozone versus time. To keep the days in their months, the months in order, and stay quick, we multiply the month integer by 100 and add the day. This means May 1st is 501 and May 2nd is 502. This gives us this view.
+
+```{r}
+ggplot(airquality, aes(x = (Month * 100 + Day), y = Ozone)) + geom_line() + geom_point()
+```
+
+This plot shows all five months. The space between the months is the lack of observations for 532 to 600, 631 to 700 and so on. What we can see is the higest recorded value for ozone in August, the next highest in July, not very many data points in June, and the next highest ozone data point in May. There is an interesting drop off at the end of August with a slight rise going into September followed by a trend to lower ozone readings. This hints at a possible relationship to temperature.
+
+Before we continue to explore the data, we will fix the date values to eliminate the gaps between months. We will do that by adding a date column to the dataframe and converting the month and day columns to dates.
+
+```{r}
+airquality$date <- as.Date(paste("1973", airquality$Month, airquality$Day, sep="-"))
+ggplot(airquality, aes(x= date, y = Ozone)) + geom_line(color = "green") + geom_point()
+str(airquality)
+```
+
+Now let's overlay our other measured values by day and see how they look in comparison. We will add on the air temperature measuremnts first, then the solar radiation values and last the wind speed.
+
+```{r}
+graph <- ggplot(airquality, aes(x= date, y = Ozone)) + geom_line(color = "green") + geom_point()
+graph <- graph + geom_line(aes(x = date, y = Temp), color = "red")
+graph
+graph <- graph + geom_line(aes(x = date, y = Solar.R), color = "orange")
+graph
+graph <- graph + geom_line(aes(x = date, y = Wind), color = "blue")
+graph
+```
+
+## Conclusion
+On first look there does not seem to be any obvious relationship between observed values. Although temperature seems to track well with ozone during September, it starts to diverge in August. In fact the highest ozone level is followed by a relative temperature high. Comparisons of solar radiation and wind have similar problems. We may need more data over a longer period to find any relationships. I will leave you with this panel view, which I would probably use as a cover page image,
+
+```{r}
+airquality <- subset(airquality, select = c(-Month, -Day, -date))
+pairs(airquality, panel = panel.smooth, main = "Air Quality Data")
+```
