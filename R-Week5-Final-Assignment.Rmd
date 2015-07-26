@@ -1,0 +1,138 @@
+---
+title: "R Programming Final Project"
+author: "Robert Godbey"
+date: "July 24, 2015"
+output: html_document
+---
+# Introduction
+
+The **hflights** dataset contains all flights departing from Houston airports IAH (George Bush Intercontinental) and HOU (Houston Hobby) in 2011. The data comes from the Research and Innovation Technology Administration at the Bureau of Transportation statistics. These are the variables or columns in the dataset.
+
+**Variables**
+
+* Year, Month, DayofMonth: date of departure
+* DayOfWeek: day of week of departure (useful for removing weekend effects)
+* DepTime, ArrTime: departure and arrival times (in local time, hhmm)
+* UniqueCarrier: unique abbreviation for a carrier
+* FlightNum: flight number
+* TailNum: airplane tail number
+* ActualElapsedTime: elapsed time of flight, in minutes
+* AirTime: flight time, in minutes
+* ArrDelay, DepDelay: arrival and departure delays, in minutes
+* Origin, Dest origin and destination airport codes
+* Distance: distance of flight, in miles
+* TaxiIn, TaxiOut: taxi in and out times in minutes
+* Cancelled: cancelled indicator: 1 = Yes, 0 = No
+* CancellationCode: reason for cancellation: A = carrier, B = weather, C = national air system,
+D = security
+* Diverted: diverted indicator: 1 = Yes, 0 = No
+
+# First Look at Dataset
+We can take our first look at the hflights dataset with R's Head and Tail functions. We can follow up by looking at the structure and summary of the data. Notice the mostly meaningless summary information on numeric fields like year, month, flightnum, cancelled, diverted and so on.
+
+```{r}
+library(hflights)
+head(hflights)
+tail(hflights)
+str(hflights)
+summary(hflights)
+```
+
+We see a dataframe of 227,496 observations of the 21 variables described above. The variables can be grouped as follows. 
+
+* __When:__ Year, Month, DayofMonth, DayofWeek (4)
+* __How Long:__ DepTime, ArrTime, ActualElaspedTime, AirTime, ArrDelay, DepDelay, TaxiIn, TaxiOut (8)
+* __Flight ID:__ UniqueCarrier, FlightNum, TailNum (3)
+* __Location:__ Origin, Dest, Distance (3)
+* __Canceled:__ Canceled, CancellationCode, Diverted (3)
+
+We can see that although we have 21 variables, we really cover only five concepts or ideas. We might also infer that "How Long" the flight took is an important concept, since eight (8) variables have something to do with total time involved in a flight. By the way, although not defined in the dataset write up, I observed that Monday is day 1 of the week through Sunday being day 7.
+
+Based on this initial examination of the dataset we should be able to gain some insight into where people fly to from Houston, how long it takes, and the likelihood of getting there.
+
+# Formatting the Dataframe
+
+To make the dataframe easier to use I want to combine the date-related fields into a date and make the variables in the dataframe factors. I find the summary information on factor data very useful. I also plan to make the binary fields True-False. We will also start the data formatting by making a copy of the hflights dataframe.
+
+## When Vaiables
+I find it more useful most times to have real date fields instead of integers for months, days and years. Here we will combine the Year, Month, DayofMonth variables into Date. We will also make the DayofWeek variable into a legible factor variable. After the conversions we will drop the separate year, month, and day fields. Notice the almost even distribution of number of flights by day of the week from the summary.
+
+```{r}
+hf.new <- hflights
+hf.new$Date <- as.Date(paste(hf.new$Year, hf.new$Month, hf.new$DayofMonth, sep="-"))
+hf.new$DayOfWeek[hf.new$DayOfWeek == 1] <- "Mon"
+hf.new$DayOfWeek[hf.new$DayOfWeek == 2] <- "Tue"
+hf.new$DayOfWeek[hf.new$DayOfWeek == 3] <- "Wed"
+hf.new$DayOfWeek[hf.new$DayOfWeek == 4] <- "Thu"
+hf.new$DayOfWeek[hf.new$DayOfWeek == 5] <- "Fri"
+hf.new$DayOfWeek[hf.new$DayOfWeek == 6] <- "Sat"
+hf.new$DayOfWeek[hf.new$DayOfWeek == 7] <- "Sun"
+hf.new$DayOfWeek <- as.factor(hf.new$DayOfWeek)
+hf.new <- subset(hf.new, select = c(-Year, -Month, -DayofMonth))
+summary(hf.new)
+```
+
+## How Long Variables
+
+These variables were all numeric and it makes sense to leave them in that form. These are the only variables where calculations may be needed.
+
+## Flight ID & Location Variables
+
+It makes sense to turn these variables into factors in the dataframe. This allows for simple counts just running the summary function. The Distance variable grouped with location is a numeric value and will stay that way. Notice the number of carriers, planes (by tail num), the only two origins, and number of destinations.
+
+```{r}
+hf.new$UniqueCarrier <- as.factor(hf.new$UniqueCarrier)
+hf.new$FlightNum <- as.factor(hf.new$FlightNum)
+hf.new$TailNum <- as.factor(hf.new$TailNum)
+hf.new$Origin <- as.factor(hf.new$Origin)
+hf.new$Dest <- as.factor(hf.new$Dest)
+summary(hf.new)
+```
+
+## Cancelled Variables
+
+We have two binary variables for yes-no or true-false for "Flight Cancelled" and "Flight Diverted". I changed them to True-False fields for simplicity. The cancellation code field was turned into a factor for ease of counting the types. The many blank values were made into NA's. Notice that we now know there were 2,973 canceled flights, 649 diverted flights, and that the cancellation codes counts add up to match the number of canceled flights.
+
+```{r}
+hf.new[["Cancelled"]] <- hf.new$Cancelled == 1
+hf.new[["Diverted"]] <- hf.new$Diverted == 1
+hf.new$CancellationCode[hf.new$CancellationCode == ""] <- NA
+hf.new$CancellationCode <- as.factor(hf.new$CancellationCode)
+summary(hf.new)
+```
+
+
+# Individual Variable Examination
+
+Let's take a closer look at the data and do some data visulization in the order we have following.
+
+## When Vaiables
+
+We can use histograms to look at the number of flights by different time periods, such as by month throughout the year and by day of the week. I found that by coded the days of week with thw first three letters makes it easier to read, I will need to figure out how to set the order. Alphabetical seems to be the default and makes Friday comes first, followd by Monday.
+
+Notice the summer months are peak flight times for the Houston airports with August hitting 20,000 flights, July slightly under that followed by a little lower June. Fall looks flat and steady as close to 18,000 flights a month. January is the lowest with just over 15,000 flights.
+
+Days of the week are interesting too, with Saturdays being the least likely day to fly and Friday being the most likely. The really is not much variation by day of the week. With all flights for the year divided ou by day, Saturday is just under 30,000 and the other day are all between 30,000 and 35,000.
+
+```{r}
+library(ggplot2)
+ggplot(hf.new, aes(x = hf.new$Date)) + geom_histogram(binwidth = 30, fill="red", color="black")
+ggplot(hf.new, aes(x = hf.new$DayOfWeek)) + geom_histogram(fill="orange", color="black")
+```
+
+## How Long Variables
+
+We can quickly look at when you are most likely to have a flight delayed by looking at the departure delay over time. You can see that we may need to spread this out, maybe look at individual months to get real detail. However, this overview does tell us some important information. That thick band of black data points at the bottom at the first box line means 125 minutes of delay. It looks like a 2 hour delay is very likely all through the year. The very long delays (over 500 minutes) are infrequent, but spread pretty evenly across the year.
+
+```{r}
+ggplot(hf.new, aes(x= Date, y = DepDelay)) + geom_line(color = "Green") + geom_point()
+```
+
+## Fini
+
+I am out of time now, so I will end here. My last look at this dataset will be to use my favorite function again a new parameter; summary(hf.new, 20). This will take the element counts of the factor variables to 20 elements. From this we can see that there were 15 different airlines flying out of Houston in 2011; that the top 20 planes flew around 900 flights in 2011; that IAH had over 175,000 flights originate from there and HOU had just over 52,000; and the top 20 destination airports with Dallas leading the list at 9,820 flights in 2011.
+
+```{r}
+summary(hf.new, 20)
+```
+
