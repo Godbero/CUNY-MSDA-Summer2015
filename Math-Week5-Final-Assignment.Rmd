@@ -1,0 +1,88 @@
+---
+title: "Math-Week5-Final"
+author: "Robert Godbey"
+date: "July 26, 2015"
+output: html_document
+---
+
+# What is Naive Bayes
+
+## Introduction - Wordy Definition
+
+Naive Bayes refers to a family of simple probabilistic classifiers based on applying Bayes' theorem with strong (naive) independence assumptions between the features.
+
+Naive Bayes has been studied extensively since the 1950s. It was introduced under a different name into the text retrieval community in the early 1960s, and remains a popular (baseline) method for text categorization, the problem of judging documents as belonging to one category or the other (such as spam or legitimate, sports or politics, etc.) with word frequencies as the features. With appropriate preprocessing, it is competitive in this domain with more advanced methods including support vector machines.It also finds application in automatic medical diagnosis.
+
+In the statistics and computer science literature, Naive Bayes models are known under a variety of names, including simple Bayes and independence Bayes. All these names reference the use of Bayes' theorem in the classifier's decision rule, but naive Bayes is not (necessarily) a Bayesian method; Russell and Norvig note that "naive Bayes" is sometimes called a Bayesian classifier, a somewhat careless usage that has prompted true Bayesians to call it the idiot Bayes model.^1^
+
+^1^Mostly Wikipedia: (https://en.wikipedia.org/wiki/Naive_Bayes_classifier) 
+
+## Introduction - Math-ey Definition
+
+Abstractly, naive Bayes is a conditional probability model: given a problem instance to be classified, represented by a vector **X** = ($x_1$,...,$x_n$) representing some n features (independent variables), it assigns to this instance probabilities $P(C_k|x_1$,...,$x_n$), for each of k possible outcomes or classes.
+
+The problem with the above formulation is that if the number of features n is large or if a feature can take on a large number of values, then basing such a model on probability tables is infeasible. A 20 X 20 pixel grid for a character has 2^400^ possible black and white patterns. A spam filter based on only 10,000 words would have 2^10,000^ possible word combinations. These are big numbers.
+
+We therefore reformulate the model to make it more tractable. Using Bayes' theorem, the conditional probability can be decomposed as:
+
+$$ P\left(C_k|\mathbf{x} \right) = \frac {P\left(C_k\right) P\left(\mathbf{x}|C_k\right)} {P\left(\mathbf{x}\right)}$$
+
+In plain English, using Bayesian probability terminology, the above equation can be written as
+
+$$\mbox{posterior} = \frac{\mbox{prior} \times \mbox{likelihood}}{\mbox{evidence}}$$
+
+In practice, there is interest only in the numerator of that fraction, because the denominator does not depend on C and the values of the features $F_i$ are given, so that the denominator is effectively constant. The numerator is equivalent to the joint probability model. This gives us:
+
+$P\left(x_1...x_d|C\right) = \Pi_{i=1}^d P\left(x_i|x_1 ... x_{i-1}, C\right)$ using the chain rule, which $= \Pi_{i=1}^d P\left(x_i|C\right)$, if we assume conditionally independence given C.
+
+Let's look at how to use naive Bayes to see what this means.
+
+# How Do You Do Naive Bayes
+
+We want to predict if the next email we get is a spam email or not. We have six observations to use to "train" our model as follows.
+
+**Separate spam from valid email, attributes = words**
+
+Obs | Message | Class
+----|---------|------------------
+D1:|"send us your password"|<span style="color:red">spam</span>
+D2:|"send us your review"|ham
+D3:|"review your password"|ham
+D4:|"review us"|<span style="color:red">spam</span>
+D5:|"send your password"|<span style="color:red">spam</span>
+D6:|"send us your account"|<span style="color:red">spam</span>
+
+1. We need to find our "priors" or the probabilities from our observations. This the probability of an email being spam or not, given by: **P(spam) = 4/6 and P(ham) = 2/6**.
+
+2. Next we create a vocabulary from the emails and count the occurances of words.
+
+Spam | Ham | Word
+-----|-----|------
+2/4 | 1/2 | password
+1/4 | 2/2 | review
+3/4 | 1/2 | send
+3/4 | 1/2 | us
+3/4 | 1/2 | your
+1/4 | 0/2 | account
+
+3. Next we get a new email and try to predict if it is spam. **New email: "review us now"**
+
+This message contains a new word we have not seen before: "now". As a good classifier, we throw that word away, because we do not know what to do with it (unless we want to save it for re-training later).
+
+4. P(review us|spam) = P(password, review, send, us, your, account|spam) =
+P(0,1,0,1,0,0|spam) = (1-2/4)(1/4)(1-3/4)(3/4)(1-3/4)(1-1/4) = .0044
+
+5. Do the same for non-spam. P(review us|ham) = P(password, review, send, us, your, account|ham) = P(0,1,0,1,0,0|ham) = (1-1/2)(2/2)(1-1/2)(1/2)(1-1/2)(1-0/2) = .0625
+
+6. P(ham|review us) = 0,0625 X 2/6 / 0.0625 X 2/6 + 0.0044 X 4/6 = 0.87
+
+This implies we want to keep the email, it's NOT spam.
+
+# When Should You Do Naive Bayes
+
+Notice in the above example that our calculation gave us 87% probabilty that our new email was not spam. However, if you look at observation D4 it is the same message we evaluated to NOT be spam, classified as spam.
+
+The calculations are fine, so what is the problem. It is the assumption of independence, even conditional independence, not being true in this case. There are classifiers that improve on this problem by not allowing it.
+
+No classifier is perfect and Naive Bayes is a simple to implement method that works a lot of the time. In a way it is a test for your assumption of conditional independence on what you are working on. A seemily safe assumption more often tha I would have thought.
+
